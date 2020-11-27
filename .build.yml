@@ -1,0 +1,13 @@
+image: alpine/edge
+packages:
+  - go
+  - mage
+sources:
+  - https://git.sr.ht/~kiba/asmith
+tasks:
+  - lint: |
+      curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.33.0
+      PATH="$(go env GOPATH)"/bin:$PATH
+      golangci-lint --version
+      cd asmith
+      mage -v lint

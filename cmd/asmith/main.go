@@ -88,7 +88,6 @@ FROM events INNER JOIN event_json ON events.event_id = event_json.event_id
 WHERE events.type = 'm.room.message' AND events.room_id = $1
 ORDER BY events.stream_ordering;
 `, roomID)
-
 	if err != nil {
 		return fmt.Errorf("error querying database: %w", err)
 	}
